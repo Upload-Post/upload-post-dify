@@ -1,0 +1,60 @@
+identity:
+  name: get_analytics
+  author: upload-post
+  label:
+    en_US: Get Profile Analytics
+description:
+  human:
+    en_US: Followers, reach and engagement metrics of a profile's connected accounts.
+  llm: Get analytics (followers, impressions, reach, engagement) for the social accounts connected to an Upload-Post profile.
+parameters:
+- name: profile_username
+  type: string
+  required: true
+  label:
+    en_US: Profile
+  human_description:
+    en_US: Upload-Post profile (username) to get analytics for.
+  llm_description: Upload-Post profile (username) to get analytics for.
+  form: llm
+- name: platforms
+  type: string
+  required: true
+  label:
+    en_US: Platforms
+  human_description:
+    en_US: 'Comma-separated platforms. Supported: instagram, tiktok, linkedin, facebook, x, youtube, threads, pinterest, bluesky, google_business.'
+  llm_description: 'Comma-separated platforms to fetch analytics for. Allowed values: instagram, tiktok, linkedin, facebook, x, youtube, threads, pinterest, bluesky, google_business.'
+  form: llm
+- name: page_id
+  type: string
+  required: false
+  label:
+    en_US: Facebook Page ID
+  human_description:
+    en_US: Facebook Page ID. Required for Facebook analytics.
+  llm_description: Facebook Page ID. Required for Facebook analytics.
+  form: llm
+- name: page_urn
+  type: string
+  required: false
+  label:
+    en_US: LinkedIn page
+  human_description:
+    en_US: 'LinkedIn only: organization page URN or numeric ID. LinkedIn analytics are only available for company pages you administer.'
+  llm_description: 'LinkedIn only: organization page URN or numeric ID. LinkedIn analytics are only available for company pages you administer.'
+  form: llm
+- name: days
+  type: number
+  required: false
+  label:
+    en_US: Days (Facebook)
+  human_description:
+    en_US: 'Facebook only: size of the insights window in days, 1-365 (default 30).'
+  llm_description: 'Facebook only: size of the insights window in days, 1-365 (default 30).'
+  form: llm
+  min: 1
+  max: 365
+extra:
+  python:
+    source: tools/get_analytics.py

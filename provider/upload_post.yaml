@@ -1,0 +1,35 @@
+identity:
+  author: upload-post
+  name: upload_post
+  label:
+    en_US: Upload-Post
+  description:
+    en_US: Publish videos, photos and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X, Threads, Pinterest, Bluesky and more from one API, then track status, history and analytics.
+  icon: icon.png
+  icon_dark: icon.png
+  tags:
+    - social
+    - productivity
+    - videos
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Upload-Post API Key
+    placeholder:
+      en_US: Paste your Upload-Post API key
+    help:
+      en_US: Create an API key in the Upload-Post dashboard (API Keys section).
+    url: https://app.upload-post.com/api-keys
+tools:
+  - tools/upload_text.yaml
+  - tools/upload_video.yaml
+  - tools/upload_photos.yaml
+  - tools/get_status.yaml
+  - tools/list_profiles.yaml
+  - tools/get_history.yaml
+  - tools/get_analytics.yaml
+extra:
+  python:
+    source: provider/upload_post.py

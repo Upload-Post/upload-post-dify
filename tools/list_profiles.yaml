@@ -1,0 +1,13 @@
+identity:
+  name: list_profiles
+  author: upload-post
+  label:
+    en_US: List Profiles
+description:
+  human:
+    en_US: List your Upload-Post profiles and the social accounts connected to each one.
+  llm: List the Upload-Post profiles of the account and which social accounts are connected to each one. Call this first to find the profile (user) to publish from.
+parameters: []
+extra:
+  python:
+    source: tools/list_profiles.py

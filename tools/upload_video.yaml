@@ -1,0 +1,95 @@
+identity:
+  name: upload_video
+  author: upload-post
+  label:
+    en_US: Upload Video
+description:
+  human:
+    en_US: Publish or schedule a video from a public URL on TikTok, Instagram, YouTube, LinkedIn and more.
+  llm: 'Publish (or schedule) a video on one or more social networks through Upload-Post. The video must be a public http(s) URL. The upload runs asynchronously: the result contains a request_id (or a job_id when scheduled) to pass to the Get Upload Status tool.'
+parameters:
+- name: user
+  type: string
+  required: true
+  label:
+    en_US: Profile
+  human_description:
+    en_US: Upload-Post profile (username) to publish from. Use List Profiles to see your profiles and their connected accounts.
+  llm_description: Upload-Post profile (username) to publish from. Use List Profiles to see your profiles and their connected accounts.
+  form: llm
+- name: platforms
+  type: string
+  required: true
+  label:
+    en_US: Platforms
+  human_description:
+    en_US: 'Comma-separated platforms. Supported: tiktok, instagram, youtube, linkedin, facebook, x, threads, pinterest, bluesky, discord, telegram, google_business, mastodon, wordpress.'
+  llm_description: 'Comma-separated list of platforms to publish to, e.g. ''tiktok,instagram''. Allowed values: tiktok, instagram, youtube, linkedin, facebook, x, threads, pinterest, bluesky, discord, telegram, google_business, mastodon, wordpress. Only use platforms connected to the profile.'
+  form: llm
+- name: video_url
+  type: string
+  required: true
+  label:
+    en_US: Video URL
+  human_description:
+    en_US: Public http(s) URL of the video file.
+  llm_description: Public http(s) URL of the video file.
+  form: llm
+- name: title
+  type: string
+  required: false
+  label:
+    en_US: Title
+  human_description:
+    en_US: Title / caption of the video. Required for YouTube.
+  llm_description: Title / caption of the video. Required for YouTube.
+  form: llm
+- name: description
+  type: string
+  required: false
+  label:
+    en_US: Description
+  human_description:
+    en_US: Optional longer text used for LinkedIn commentary, Facebook and YouTube descriptions and Pinterest notes.
+  llm_description: Optional longer text used for LinkedIn commentary, Facebook and YouTube descriptions and Pinterest notes.
+  form: llm
+- name: scheduled_date
+  type: string
+  required: false
+  label:
+    en_US: Scheduled date
+  human_description:
+    en_US: Optional ISO-8601 date/time to schedule the post, e.g. 2026-12-31T18:00:00Z. Must be in the future (max 365 days). Omit to publish now.
+  llm_description: Optional ISO-8601 date/time to schedule the post instead of publishing now. Leave empty to publish immediately.
+  form: llm
+- name: timezone
+  type: string
+  required: false
+  label:
+    en_US: Timezone
+  human_description:
+    en_US: Optional IANA timezone (e.g. Europe/Madrid) used to interpret the scheduled date. Defaults to UTC.
+  llm_description: Optional IANA timezone (e.g. Europe/Madrid) used to interpret the scheduled date. Defaults to UTC.
+  form: llm
+- name: add_to_queue
+  type: boolean
+  required: false
+  label:
+    en_US: Add to queue
+  human_description:
+    en_US: Schedule the post in the profile's next free queue slot. Cannot be combined with a scheduled date.
+  llm_description: Schedule the post in the profile's next free queue slot. Cannot be combined with a scheduled date.
+  form: llm
+  default: false
+- name: first_comment
+  type: string
+  required: false
+  label:
+    en_US: First comment
+  human_description:
+    en_US: Optional first comment posted right after publishing (Instagram, Facebook, Threads, Bluesky, X, YouTube, LinkedIn, TikTok).
+  llm_description: Optional first comment posted right after publishing (Instagram, Facebook, Threads, Bluesky, X, YouTube, LinkedIn, TikTok).
+  form: llm
+extra:
+  python:
+    source: tools/upload_video.py

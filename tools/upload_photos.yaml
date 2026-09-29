@@ -1,0 +1,95 @@
+identity:
+  name: upload_photos
+  author: upload-post
+  label:
+    en_US: Upload Photos
+description:
+  human:
+    en_US: Publish or schedule one or more photos (a carousel) from public URLs.
+  llm: Publish (or schedule) one or more photos on social networks through Upload-Post. Photos must be public http(s) URLs. Several photos become a carousel where supported. Returns a request_id (or a job_id when scheduled) for the Get Upload Status tool.
+parameters:
+- name: user
+  type: string
+  required: true
+  label:
+    en_US: Profile
+  human_description:
+    en_US: Upload-Post profile (username) to publish from. Use List Profiles to see your profiles and their connected accounts.
+  llm_description: Upload-Post profile (username) to publish from. Use List Profiles to see your profiles and their connected accounts.
+  form: llm
+- name: platforms
+  type: string
+  required: true
+  label:
+    en_US: Platforms
+  human_description:
+    en_US: 'Comma-separated platforms. Supported: tiktok, instagram, linkedin, facebook, x, threads, pinterest, bluesky, discord, telegram, google_business, mastodon, lemmy, wordpress.'
+  llm_description: 'Comma-separated list of platforms to publish to, e.g. ''tiktok,instagram''. Allowed values: tiktok, instagram, linkedin, facebook, x, threads, pinterest, bluesky, discord, telegram, google_business, mastodon, lemmy, wordpress. Only use platforms connected to the profile.'
+  form: llm
+- name: photo_urls
+  type: string
+  required: true
+  label:
+    en_US: Photo URLs
+  human_description:
+    en_US: Comma or newline separated list of public http(s) image URLs.
+  llm_description: Comma-separated list of public http(s) image URLs, in carousel order.
+  form: llm
+- name: title
+  type: string
+  required: false
+  label:
+    en_US: Caption
+  human_description:
+    en_US: Caption / title of the post.
+  llm_description: Caption / title of the post.
+  form: llm
+- name: description
+  type: string
+  required: false
+  label:
+    en_US: Description
+  human_description:
+    en_US: Optional longer text used on TikTok photo descriptions, LinkedIn commentary, Facebook descriptions and Pinterest notes.
+  llm_description: Optional longer text used on TikTok photo descriptions, LinkedIn commentary, Facebook descriptions and Pinterest notes.
+  form: llm
+- name: scheduled_date
+  type: string
+  required: false
+  label:
+    en_US: Scheduled date
+  human_description:
+    en_US: Optional ISO-8601 date/time to schedule the post, e.g. 2026-12-31T18:00:00Z. Must be in the future (max 365 days). Omit to publish now.
+  llm_description: Optional ISO-8601 date/time to schedule the post instead of publishing now. Leave empty to publish immediately.
+  form: llm
+- name: timezone
+  type: string
+  required: false
+  label:
+    en_US: Timezone
+  human_description:
+    en_US: Optional IANA timezone (e.g. Europe/Madrid) used to interpret the scheduled date. Defaults to UTC.
+  llm_description: Optional IANA timezone (e.g. Europe/Madrid) used to interpret the scheduled date. Defaults to UTC.
+  form: llm
+- name: add_to_queue
+  type: boolean
+  required: false
+  label:
+    en_US: Add to queue
+  human_description:
+    en_US: Schedule the post in the profile's next free queue slot. Cannot be combined with a scheduled date.
+  llm_description: Schedule the post in the profile's next free queue slot. Cannot be combined with a scheduled date.
+  form: llm
+  default: false
+- name: first_comment
+  type: string
+  required: false
+  label:
+    en_US: First comment
+  human_description:
+    en_US: Optional first comment posted right after publishing (Instagram, Facebook, Threads, Bluesky, X, YouTube, LinkedIn, TikTok).
+  llm_description: Optional first comment posted right after publishing (Instagram, Facebook, Threads, Bluesky, X, YouTube, LinkedIn, TikTok).
+  form: llm
+extra:
+  python:
+    source: tools/upload_photos.py

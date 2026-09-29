@@ -1,0 +1,86 @@
+identity:
+  name: upload_text
+  author: upload-post
+  label:
+    en_US: Upload Text Post
+description:
+  human:
+    en_US: Publish or schedule a text-only post on X, LinkedIn, Facebook, Threads, Bluesky and more.
+  llm: Publish (or schedule) a text-only post on one or more social networks through Upload-Post. Returns the per-platform result, a request_id, or a job_id when scheduled.
+parameters:
+- name: user
+  type: string
+  required: true
+  label:
+    en_US: Profile
+  human_description:
+    en_US: Upload-Post profile (username) to publish from. Use List Profiles to see your profiles and their connected accounts.
+  llm_description: Upload-Post profile (username) to publish from. Use List Profiles to see your profiles and their connected accounts.
+  form: llm
+- name: platforms
+  type: string
+  required: true
+  label:
+    en_US: Platforms
+  human_description:
+    en_US: 'Comma-separated platforms. Supported: linkedin, x, facebook, threads, bluesky, discord, telegram, google_business, slack, mastodon, nostr, lemmy, devto, hashnode, wordpress, whop, listmonk.'
+  llm_description: 'Comma-separated list of platforms to publish to, e.g. ''tiktok,instagram''. Allowed values: linkedin, x, facebook, threads, bluesky, discord, telegram, google_business, slack, mastodon, nostr, lemmy, devto, hashnode, wordpress, whop, listmonk. Only use platforms connected to the profile.'
+  form: llm
+- name: text
+  type: string
+  required: true
+  label:
+    en_US: Text
+  human_description:
+    en_US: The text of the post.
+  llm_description: The text of the post.
+  form: llm
+- name: link_url
+  type: string
+  required: false
+  label:
+    en_US: Link URL
+  human_description:
+    en_US: Optional URL shown as a link preview card on LinkedIn, Bluesky and Facebook.
+  llm_description: Optional URL shown as a link preview card on LinkedIn, Bluesky and Facebook.
+  form: llm
+- name: scheduled_date
+  type: string
+  required: false
+  label:
+    en_US: Scheduled date
+  human_description:
+    en_US: Optional ISO-8601 date/time to schedule the post, e.g. 2026-12-31T18:00:00Z. Must be in the future (max 365 days). Omit to publish now.
+  llm_description: Optional ISO-8601 date/time to schedule the post instead of publishing now. Leave empty to publish immediately.
+  form: llm
+- name: timezone
+  type: string
+  required: false
+  label:
+    en_US: Timezone
+  human_description:
+    en_US: Optional IANA timezone (e.g. Europe/Madrid) used to interpret the scheduled date. Defaults to UTC.
+  llm_description: Optional IANA timezone (e.g. Europe/Madrid) used to interpret the scheduled date. Defaults to UTC.
+  form: llm
+- name: add_to_queue
+  type: boolean
+  required: false
+  label:
+    en_US: Add to queue
+  human_description:
+    en_US: Schedule the post in the profile's next free queue slot. Cannot be combined with a scheduled date.
+  llm_description: Schedule the post in the profile's next free queue slot. Cannot be combined with a scheduled date.
+  form: llm
+  default: false
+- name: first_comment
+  type: string
+  required: false
+  label:
+    en_US: First comment
+  human_description:
+    en_US: Optional first comment posted right after publishing (Instagram, Facebook, Threads, Bluesky, X, YouTube, LinkedIn, TikTok).
+  llm_description: Optional first comment posted right after publishing (Instagram, Facebook, Threads, Bluesky, X, YouTube, LinkedIn, TikTok).
+  form: llm
+extra:
+  python:
+    source: tools/upload_text.py

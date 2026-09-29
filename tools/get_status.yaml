@@ -1,0 +1,31 @@
+identity:
+  name: get_status
+  author: upload-post
+  label:
+    en_US: Get Upload Status
+description:
+  human:
+    en_US: Check the status of an upload (request_id) or a scheduled post (job_id).
+  llm: Get the status and per-platform results (including post URLs) of an Upload-Post upload. Pass the request_id returned by an upload, or the job_id returned by a scheduled or queued upload.
+parameters:
+- name: request_id
+  type: string
+  required: false
+  label:
+    en_US: Request ID
+  human_description:
+    en_US: request_id returned by an upload.
+  llm_description: request_id returned by an upload.
+  form: llm
+- name: job_id
+  type: string
+  required: false
+  label:
+    en_US: Job ID
+  human_description:
+    en_US: job_id returned by a scheduled or queued upload.
+  llm_description: job_id returned by a scheduled or queued upload.
+  form: llm
+extra:
+  python:
+    source: tools/get_status.py

@@ -1,0 +1,117 @@
+identity:
+  name: get_history
+  author: upload-post
+  label:
+    en_US: Get Upload History
+description:
+  human:
+    en_US: Paginated history of your uploads with per-platform results.
+  llm: Get the paginated upload history of the Upload-Post account with per-platform results, filterable by platform, status, profile, request_id, job_id and date range.
+parameters:
+- name: page
+  type: number
+  required: false
+  label:
+    en_US: Page
+  human_description:
+    en_US: Page number, starting at 1.
+  llm_description: Page number, starting at 1.
+  form: llm
+  default: 1
+  min: 1
+- name: limit
+  type: select
+  required: false
+  label:
+    en_US: Page size
+  human_description:
+    en_US: Number of results per page.
+  llm_description: Number of results per page.
+  form: llm
+  default: '10'
+  options:
+  - value: '10'
+    label:
+      en_US: '10'
+  - value: '20'
+    label:
+      en_US: '20'
+  - value: '50'
+    label:
+      en_US: '50'
+  - value: '100'
+    label:
+      en_US: '100'
+- name: platform
+  type: string
+  required: false
+  label:
+    en_US: Platform
+  human_description:
+    en_US: Only results for this platform, e.g. tiktok or instagram.
+  llm_description: Only results for this platform, e.g. tiktok or instagram.
+  form: llm
+- name: status
+  type: select
+  required: false
+  label:
+    en_US: Status
+  human_description:
+    en_US: Only successful or only failed uploads.
+  llm_description: Only successful or only failed uploads.
+  form: llm
+  options:
+  - value: success
+    label:
+      en_US: Success
+  - value: failed
+    label:
+      en_US: Failed
+- name: profile_username
+  type: string
+  required: false
+  label:
+    en_US: Profile
+  human_description:
+    en_US: Only uploads of this profile.
+  llm_description: Only uploads of this profile.
+  form: llm
+- name: request_id
+  type: string
+  required: false
+  label:
+    en_US: Request ID
+  human_description:
+    en_US: Only the results of this upload request.
+  llm_description: Only the results of this upload request.
+  form: llm
+- name: job_id
+  type: string
+  required: false
+  label:
+    en_US: Job ID
+  human_description:
+    en_US: Only the results of this scheduled/async job.
+  llm_description: Only the results of this scheduled/async job.
+  form: llm
+- name: start
+  type: string
+  required: false
+  label:
+    en_US: Start date
+  human_description:
+    en_US: Start date (YYYY-MM-DD). Must be used together with End date.
+  llm_description: Start date (YYYY-MM-DD). Must be used together with End date.
+  form: llm
+- name: end
+  type: string
+  required: false
+  label:
+    en_US: End date
+  human_description:
+    en_US: End date (YYYY-MM-DD). Must be used together with Start date; max range 2 months.
+  llm_description: End date (YYYY-MM-DD). Must be used together with Start date; max range 2 months.
+  form: llm
+extra:
+  python:
+    source: tools/get_history.py
