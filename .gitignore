@@ -173,4 +173,5 @@ cython_debug/
 # macOS
 .DS_Store
 .AppleDouble
-.LSOverride*.difypkg
+.LSOverride
+*.difypkg
